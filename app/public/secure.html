@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Secure Area</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Secure Area</h1>
+<p id="welcome"></p>
+<button id="logout">Log out</button>
+<script>
+var user = sessionStorage.getItem("user");
+if (!user) { window.location.href = "/login.html"; }
+document.getElementById("welcome").textContent = "Welcome, " + user + "!";
+document.getElementById("logout").addEventListener("click", function () {
+  sessionStorage.removeItem("user");
+  window.location.href = "/login.html";
+});
+</script>
+</main>
+</body>
+</html>

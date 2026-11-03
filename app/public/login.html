@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Login</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Login</h1>
+<form id="login-form">
+<label for="username">Username</label><input type="text" id="username" name="username">
+<label for="password">Password</label><input type="password" id="password" name="password">
+<button type="submit">Sign in</button>
+<p id="login-error" class="error" role="alert" hidden></p>
+</form>
+<script>
+document.getElementById("login-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var u = document.getElementById("username").value;
+  var p = document.getElementById("password").value;
+  if (u === "tester" && p === "secret123") {
+    sessionStorage.setItem("user", u);
+    window.location.href = "/secure.html";
+  } else {
+    var err = document.getElementById("login-error");
+    err.textContent = "Invalid username or password";
+    err.hidden = false;
+  }
+});
+</script>
+</main>
+</body>
+</html>
