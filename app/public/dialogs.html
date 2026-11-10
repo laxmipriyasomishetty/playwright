@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Dialogs</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Dialogs</h1>
+<button id="alert-btn">Show alert</button>
+<button id="confirm-btn">Show confirm</button>
+<button id="prompt-btn">Show prompt</button>
+<p id="dialog-result"></p>
+<script>
+var out = document.getElementById("dialog-result");
+document.getElementById("alert-btn").onclick = function () { alert("Hello from the alert"); out.textContent = "Alert closed"; };
+document.getElementById("confirm-btn").onclick = function () { out.textContent = confirm("Delete this item?") ? "Confirmed" : "Cancelled"; };
+document.getElementById("prompt-btn").onclick = function () {
+  var name = prompt("What is your name?");
+  out.textContent = name === null ? "Prompt dismissed" : "Hello, " + name;
+};
+</script>
+</main>
+</body>
+</html>
