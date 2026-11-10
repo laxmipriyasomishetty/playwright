@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Child Window</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Child Window</h1>
+<p id="child-text">This page was opened in a separate window.</p>
+<script>
+var from = new URLSearchParams(location.search).get("from");
+if (from) document.getElementById("child-text").textContent += " Source: " + from;
+</script>
+</main>
+</body>
+</html>

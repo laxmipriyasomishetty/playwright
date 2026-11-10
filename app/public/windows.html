@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Windows and Tabs</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Windows and Tabs</h1>
+<p><a id="new-tab-link" href="/child.html" target="_blank">Open child page in a new tab</a></p>
+<button id="popup-button">Open popup window</button>
+<script>
+document.getElementById("popup-button").addEventListener("click", function () {
+  window.open("/child.html?from=popup", "popup", "width=400,height=300");
+});
+</script>
+</main>
+</body>
+</html>
