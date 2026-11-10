@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Register</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Register</h1>
+<form id="register-form" novalidate>
+<label for="fullname">Full name</label><input type="text" id="fullname" name="fullname">
+<span class="error" data-error="fullname"></span>
+<label for="email">Email</label><input type="email" id="email" name="email">
+<span class="error" data-error="email"></span>
+<label for="country">Country</label>
+<select id="country" name="country">
+<option value="">Select a country</option><option value="in">India</option><option value="us">United States</option><option value="de">Germany</option>
+</select>
+<span class="error" data-error="country"></span>
+<label for="dob">Date of birth</label><input type="date" id="dob" name="dob">
+<fieldset><legend>Account type</legend>
+<label><input type="radio" name="plan" value="personal" checked> Personal</label>
+<label><input type="radio" name="plan" value="business"> Business</label>
+</fieldset>
+<label for="bio">About you</label><textarea id="bio" name="bio" rows="3"></textarea>
+<label><input type="checkbox" id="terms" name="terms"> I accept the terms</label>
+<span class="error" data-error="terms"></span>
+<button type="submit">Create account</button>
+</form>
+<p id="register-result" class="success" hidden></p>
+<script>
+document.getElementById("register-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var f = e.target;
+  var errors = {};
+  if (!f.fullname.value.trim()) errors.fullname = "Name is required";
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value)) errors.email = "Enter a valid email";
+  if (!f.country.value) errors.country = "Pick a country";
+  if (!f.terms.checked) errors.terms = "You must accept the terms";
+  document.querySelectorAll("[data-error]").forEach(function (el) {
+    el.textContent = errors[el.dataset.error] || "";
+  });
+  var result = document.getElementById("register-result");
+  if (Object.keys(errors).length === 0) {
+    var plan = f.plan.value;
+    result.textContent = "Account created for " + f.fullname.value + " (" + plan + ", " + f.country.options[f.country.selectedIndex].text + ")";
+    result.hidden = false;
+  } else {
+    result.hidden = true;
+  }
+});
+</script>
+</main>
+</body>
+</html>
