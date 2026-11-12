@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Mouse and Keyboard</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Mouse and Keyboard</h1>
+<h2>Drag and drop</h2>
+<div id="drag-item" draggable="true">Drag me</div>
+<div id="drop-zone">Drop here</div>
+<h2>Hover menu</h2>
+<div class="menu"><button id="menu-btn">Account</button>
+<div class="menu-items"><a href="#profile" id="profile-link">Profile</a></div></div>
+<h2>Keyboard</h2>
+<input type="text" id="key-input" placeholder="Press a key">
+<p id="key-result"></p>
+<h2>Double and right click</h2>
+<button id="dbl-btn">Double click me</button>
+<button id="ctx-btn">Right click me</button>
+<p id="click-result"></p>
+<script>
+var item = document.getElementById("drag-item");
+var zone = document.getElementById("drop-zone");
+item.addEventListener("dragstart", function (e) { e.dataTransfer.setData("text/plain", "item"); });
+zone.addEventListener("dragover", function (e) { e.preventDefault(); });
+zone.addEventListener("drop", function (e) {
+  e.preventDefault();
+  zone.textContent = "Item dropped";
+  zone.classList.add("filled");
+});
+document.getElementById("key-input").addEventListener("keydown", function (e) {
+  document.getElementById("key-result").textContent = "You pressed: " + e.key;
+});
+var cr = document.getElementById("click-result");
+document.getElementById("dbl-btn").addEventListener("dblclick", function () { cr.textContent = "Double clicked"; });
+document.getElementById("ctx-btn").addEventListener("contextmenu", function (e) { e.preventDefault(); cr.textContent = "Right clicked"; });
+</script>
+</main>
+</body>
+</html>
