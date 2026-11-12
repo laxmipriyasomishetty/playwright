@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Dynamic Content</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Dynamic Content</h1>
+<button id="load-btn">Load data</button>
+<p id="loader" hidden>Loading...</p>
+<p id="loaded-text"></p>
+<button id="reveal-btn">Reveal hidden field</button>
+<div id="reveal-area"></div>
+<script>
+document.getElementById("load-btn").addEventListener("click", function () {
+  var loader = document.getElementById("loader");
+  loader.hidden = false;
+  fetch("/api/slow").then(function (r) { return r.json(); }).then(function (d) {
+    loader.hidden = true;
+    document.getElementById("loaded-text").textContent = d.message;
+  });
+});
+document.getElementById("reveal-btn").addEventListener("click", function () {
+  setTimeout(function () {
+    document.getElementById("reveal-area").innerHTML = "<input type=\"text\" id=\"revealed-input\" placeholder=\"Now visible\">";
+  }, 1000);
+});
+</script>
+</main>
+</body>
+</html>
