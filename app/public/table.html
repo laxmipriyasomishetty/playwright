@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Orders Table</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Orders Table</h1>
+<input type="text" id="filter" placeholder="Filter by customer">
+<table id="orders">
+<thead><tr><th data-col="0">Customer</th><th data-col="1">Item</th><th data-col="2">Amount</th></tr></thead>
+<tbody>
+<tr><td>Meera</td><td>Notebook</td><td>45</td></tr>
+<tr><td>Arjun</td><td>Desk Lamp</td><td>220</td></tr>
+<tr><td>Zoya</td><td>Backpack</td><td>500</td></tr>
+<tr><td>Carlos</td><td>Notebook</td><td>90</td></tr>
+</tbody>
+</table>
+<script>
+var tbody = document.querySelector("#orders tbody");
+document.getElementById("filter").addEventListener("input", function (e) {
+  var q = e.target.value.toLowerCase();
+  tbody.querySelectorAll("tr").forEach(function (row) {
+    row.hidden = !row.cells[0].textContent.toLowerCase().includes(q);
+  });
+});
+document.querySelectorAll("#orders th").forEach(function (th) {
+  var asc = true;
+  th.addEventListener("click", function () {
+    var col = Number(th.dataset.col);
+    var rows = Array.from(tbody.querySelectorAll("tr"));
+    rows.sort(function (a, b) {
+      var x = a.cells[col].textContent, y = b.cells[col].textContent;
+      var cmp = isNaN(x) ? x.localeCompare(y) : Number(x) - Number(y);
+      return asc ? cmp : -cmp;
+    });
+    asc = !asc;
+    rows.forEach(function (r) { tbody.appendChild(r); });
+  });
+});
+</script>
+</main>
+</body>
+</html>
