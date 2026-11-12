@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Files</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a href="/">Home</a><a href="/login.html">Login</a><a href="/register.html">Register</a><a href="/windows.html">Windows</a><a href="/dialogs.html">Dialogs</a><a href="/frames.html">Frames</a><a href="/files.html">Files</a><a href="/table.html">Table</a><a href="/interactions.html">Interactions</a><a href="/dynamic.html">Dynamic</a></header>
+<main>
+<h1>Files</h1>
+<h2>Upload</h2>
+<input type="file" id="file-input">
+<p id="file-name"></p>
+<h2>Download</h2>
+<button id="download-btn">Download report.txt</button>
+<script>
+document.getElementById("file-input").addEventListener("change", function (e) {
+  var f = e.target.files[0];
+  if (!f) return;
+  var reader = new FileReader();
+  reader.onload = function () {
+    document.getElementById("file-name").textContent = "Uploaded: " + f.name + " (" + reader.result.length + " chars)";
+  };
+  reader.readAsText(f);
+});
+document.getElementById("download-btn").addEventListener("click", function () {
+  var blob = new Blob(["Quarterly report\nTotal: 42\n"], { type: "text/plain" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "report.txt";
+  a.click();
+});
+</script>
+</main>
+</body>
+</html>
